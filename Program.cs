@@ -12,44 +12,57 @@ namespace Electric_calculator
         static float I = default;
         static float U = 220;
         static float Uline = 0.38f;
-        static float U_3 = U * 3;
+        static float U_3 = U * 3; // 660 v
         static float CosF = default;
+        static float I_A, I_B, I_C = default;
+        
+        
 
         static void Main(string[] args)
         {
-            ThreePhaseLoadPower();
-            ThreePhaseCurrentFromPower();
+            ThreePhaseLoadPowerSimmetry();
+            ThreePhaseCurrentFromPowerSimmetry();
+            ThreePhaseLoadPowerAsimmetry();
+            Console.ReadLine();
         }
 
-        static void ThreePhaseLoadPower () //Расчёт мощности (Р) с трёх-фазной, симметричной нагрузкой.
+        static void ThreePhaseLoadPowerSimmetry() //Расчёт мощности (Р) с трёх-фазной, симметричной нагрузкой.// P = 3*Uф*I* cosF
         {
-            Console.WriteLine($"В ведите ТОК (А) что бы расчитать мощьность в Вт ");
-
+            Console.WriteLine("Расчёт мощности (Р) с трёх-фазной, симметричной нагрузкой.// P = 3*Uф*I* cosF\n");
+            Console.Write($"В ведите ТОК в Амперах:  ");
             I = Convert.ToSingle(Console.ReadLine());
-
-            Console.WriteLine($"Введите cosF (от 0.1 до 1)");
-
+            Console.Write($"Введите cosF (от 0.1 до 1):  ");
             CosF = Convert.ToSingle(Console.ReadLine());
-
             P = U_3 * I * CosF;
-            Console.WriteLine($"Мощьность = {P/1000} кВт ");
-
+            Console.WriteLine($"\nМощьность = {P/1000} кВт \n------------------------------------------------------");
         }
 
-        static void ThreePhaseCurrentFromPower() ////Расчёт силы тока от мощности (Р) с трёх-фазной, симметричной нагрузкой.// I = P/1.73*Uл*cos φ
+        static void ThreePhaseCurrentFromPowerSimmetry() //Расчёт силы тока от мощности (Р) с трёх-фазной, симметричной нагрузкой.// I = P/1.73*Uл*cosF
         {
-            Console.WriteLine($"Введите мощность в Ваттах (Р)");
-
+            Console.WriteLine("Расчёт силы тока от мощности (Р) с трёх-фазной, симметричной нагрузкой.// I = P/1.73*Uл*cosF\n");
+            Console.Write($"Введите мощность в Ваттах:  ");
             P = Convert.ToSingle(Console.ReadLine());
             P /= 1000;
-
-            Console.WriteLine($"Введите cosF (от 0.1 до 1)");
-
+            Console.Write($"Введите cosF (от 0.1 до 1):  ");
             CosF = Convert.ToSingle(Console.ReadLine());
-
             I = P / (1.73f * Uline) * CosF;
-
-            Console.WriteLine($"Ток = {I} Ампер ");
+            Console.WriteLine($"\nТок = {I.ToString("F"+2)} Ампер \n-----------------------------------------------");
         }
+
+        static void ThreePhaseLoadPowerAsimmetry() //Расчёт мощности (Р) с трёх-фазной, НЕсимметричной нагрузкой.// (P)общ = (((Ua*Ia*) + (Ub*Ib*) + (Uc*Ic*)) * cos(φ)) / 3
+        {
+            Console.WriteLine("Расчёт мощности (Р) с трёх-фазной, НЕсимметричной нагрузкой.// (P)общ = (((Ua*Ia*) + (Ub*Ib*) + (Uc*Ic*)) * cos(φ)) / 3 \n");
+            Console.Write($"В ведите ТОК фазы А :  ");
+            I_A = Convert.ToSingle(Console.ReadLine());
+            Console.Write($"В ведите ТОК фазы B :  ");
+            I_B = Convert.ToSingle(Console.ReadLine());
+            Console.Write($"В ведите ТОК фазы C :  ");
+            I_C = Convert.ToSingle(Console.ReadLine());
+            Console.Write($"Введите cosF (от 0.1 до 1):  ");
+            CosF = Convert.ToSingle(Console.ReadLine());
+            P = ((U * I_A ) + (U * I_B ) + (U * I_C )) * CosF;
+            Console.WriteLine($"\nСуммарная мощьность не симметричной нагрузки равна: {P / 1000} кВт \n------------------------------------------------------");
+        }
+
     }
 }
