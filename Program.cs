@@ -22,42 +22,42 @@ namespace Electric_calculator
         {
             while (true)
             {
-                Console.WriteLine("Выбор варианта работы программы: " +
-                "\nвведите 1 Для расчёта мощности (Р) с трёхфазной, симметричной нагрузкой. // P = 3*Uф*I* cosF" +
-                "\nвведите 2 Для расчёта силы тока (I) от мощности (Р) с трёхфазной, симметричной нагрузкой. // I = P/1.73*Uл*cosF" +
-                "\nвведите 3 Для расчёта мощности (Р) с трёхфазной, НЕ симметричной нагрузкой. // (P)общ = ((Ua*Ia*) + (Ub*Ib*) + (Uc*Ic*)) * cos(φ)");
+                Console.WriteLine("\nВыбор варианта работы программы:\n " +
+                "\nВведите 1 Для расчёта мощности (Р) с трёхфазной, симметричной нагрузкой." +
+                "\nВведите 2 Для расчёта силы тока (I) от мощности (Р) с трёхфазной, симметричной нагрузкой." +
+                "\nВведите 3 Для расчёта мощности (Р) с трёхфазной, НЕ симметричной нагрузкой.");
 
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1:
-                        Console.WriteLine("Start 1");
+                        Console.WriteLine("Запущен 1-ый вариант работы программы\n");
                         ThreePhaseLoadPowerSymmetric();
                         break;
                     case 2:
-                        Console.WriteLine("Start 2");
+                        Console.WriteLine("Запущен 2-ой вариант работы программы\n");
                         ThreePhaseCurrentFromPowerSymmetric();
                         break;
                     case 3:
-                        Console.WriteLine("Start 3");
+                        Console.WriteLine("Запущен 3-ий вариант работы программы\n");
                         ThreePhaseLoadPowerAsymmetric();
                         break;
 
                     default:
-                        Console.WriteLine("default...");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Вы неверно выбрали режим работы.\nНажмите ENTER, а затем 1, 2 или 3 для выбора режима работы программы ...");
+                        Console.ForegroundColor = ConsoleColor.White;
                         Console.ReadLine();
                         break;
                 }
 
-                Console.ReadLine();
             }
-            
             
         }
 
         static void ThreePhaseLoadPowerSymmetric() //Расчёт мощности (Р) с трёхфазной, симметричной нагрузкой.// P = 3*Uф*I* cosF
         {
             #region
-            Console.WriteLine("Расчёт мощности (Р) с трёхфазной, симметричной нагрузкой.// P = 3*Uф*I* cosF\n");
+            Console.WriteLine("Расчёт мощности (Р) с трёхфазной, симметричной нагрузкой.\n// P = 3*Uф*I* cosF\n");
             Console.Write($"В ведите ТОК в Амперах:  ");
             I = Convert.ToSingle(Console.ReadLine());
             Console.Write($"Введите cosF (от 0.1 до 1):  ");
@@ -70,7 +70,7 @@ namespace Electric_calculator
         static void ThreePhaseCurrentFromPowerSymmetric() //Расчёт силы тока от мощности (Р) с трёхфазной, симметричной нагрузкой.// I = P/1.73*Uл*cosF
         {
             #region
-            Console.WriteLine("Расчёт силы тока от мощности (Р) с трёхфазной, симметричной нагрузкой.// I = P/1.73*Uл*cosF\n");
+            Console.WriteLine("Расчёт силы тока от мощности (Р) с трёхфазной, симметричной нагрузкой.\n// I = P/1.73*Uл*cosF\n");
             Console.Write($"Введите мощность в Ваттах:  ");
             P = Convert.ToSingle(Console.ReadLine());
             P /= 1000;
@@ -84,7 +84,7 @@ namespace Electric_calculator
         static void ThreePhaseLoadPowerAsymmetric() //Расчёт мощности (Р) с трёхфазной, НЕ симметричной нагрузкой.// (P)общ = ((Ua*Ia*) + (Ub*Ib*) + (Uc*Ic*)) * cos(φ)
         {
             #region
-            Console.WriteLine("Расчёт мощности (Р) с трёхфазной, НЕ симметричной нагрузкой.// (P)общ = (((Ua*Ia*) + (Ub*Ib*) + (Uc*Ic*)) * cos(φ)) / 3 \n");
+            Console.WriteLine("Расчёт мощности (Р) с трёхфазной, НЕ симметричной нагрузкой.\n// (P)общ = (((Ua*Ia)+(Ub*Ib)+(Uc*Ic))*cos(φ))/3 \n");
             Console.Write($"В ведите ТОК фазы А :  ");
             I_A = Convert.ToSingle(Console.ReadLine());
             Console.Write($"В ведите ТОК фазы B :  ");
