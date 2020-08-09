@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,22 +32,26 @@ namespace Electric_calculator
                 {
                     case 1:
                         Console.WriteLine("Запущен 1-ый вариант работы программы\n");
+                        Console.WriteLine(new string('_', 80));
                         ThreePhaseLoadPowerSymmetric();
                         break;
                     case 2:
                         Console.WriteLine("Запущен 2-ой вариант работы программы\n");
+                        Console.WriteLine(new string('_', 80));
                         ThreePhaseCurrentFromPowerSymmetric();
                         break;
                     case 3:
                         Console.WriteLine("Запущен 3-ий вариант работы программы\n");
+                        Console.WriteLine(new string('_', 80));
                         ThreePhaseLoadPowerAsymmetric();
                         break;
 
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Вы неверно выбрали режим работы.\nНажмите ENTER, а затем 1, 2 или 3 для выбора режима работы программы ...");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ResetColor();
                         Console.ReadLine();
+                        Console.WriteLine(new string ('_',80));
                         break;
                 }
 
@@ -63,7 +68,9 @@ namespace Electric_calculator
             Console.Write($"Введите cosF (от 0.1 до 1):  ");
             CosF = Convert.ToSingle(Console.ReadLine());
             P = U_3 * I * CosF;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nМощьность трёхфазной, симметричной нагрузки равна: {P/1000} кВт \n------------------------------------------------------");
+            Console.ResetColor();
             #endregion
         }
 
@@ -77,7 +84,9 @@ namespace Electric_calculator
             Console.Write($"Введите cosF (от 0.1 до 1):  ");
             CosF = Convert.ToSingle(Console.ReadLine());
             I = P / (1.73f * Uline) * CosF;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nСила Тока трёхфазной, симметричной нагрузки равна: {I.ToString("F"+2)} Ампер \n-----------------------------------------------");
+            Console.ResetColor();
             #endregion
         }
 
@@ -94,7 +103,9 @@ namespace Electric_calculator
             Console.Write($"Введите cosF (от 0.1 до 1):  ");
             CosF = Convert.ToSingle(Console.ReadLine());
             P = ((U * I_A ) + (U * I_B ) + (U * I_C )) * CosF;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\nСуммарная мощьность трёхфазной, НЕ симметричной нагрузки равна: {P / 1000} кВт \n------------------------------------------------------");
+            Console.ResetColor();
             #endregion
         }
 
