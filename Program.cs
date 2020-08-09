@@ -26,7 +26,9 @@ namespace Electric_calculator
                 Console.WriteLine("\nВыбор варианта работы программы:\n " +
                 "\nВведите 1 Для расчёта мощности (Р) с трёхфазной, симметричной нагрузкой." +
                 "\nВведите 2 Для расчёта силы тока (I) от мощности (Р) с трёхфазной, симметричной нагрузкой." +
-                "\nВведите 3 Для расчёта мощности (Р) с трёхфазной, НЕ симметричной нагрузкой.");
+                "\nВведите 3 Для расчёта мощности (Р) с трёхфазной, НЕ симметричной нагрузкой." +
+                "\nВведите 4 Для расчёта мощности (Р) в однофазной цепи." +
+                "\nВведите 5 Для расчёта силы тока (I) в однофазной цепи.");
 
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
@@ -44,6 +46,16 @@ namespace Electric_calculator
                         Console.WriteLine("Запущен 3-ий вариант работы программы\n");
                         Console.WriteLine(new string('_', 80));
                         ThreePhaseLoadPowerAsymmetric();
+                        break;
+                    case 4:
+                        Console.WriteLine("Запущен 4-ий вариант работы программы\n");
+                        Console.WriteLine(new string('_', 80));
+                        OnePhaseLoadPower();
+                        break;
+                    case 5:
+                        Console.WriteLine("Запущен 5-ий вариант работы программы\n");
+                        Console.WriteLine(new string('_', 80));
+                        OnePhaseCurrentFromPower();
                         break;
 
                     default:
@@ -109,5 +121,29 @@ namespace Electric_calculator
             #endregion
         }
 
+
+        static void OnePhaseLoadPower() //Расчёт мощьности P = U * I
+        {
+            Console.WriteLine("Расчёт мощности (Р) в однофазной цепи.\n// P = U * I\n");
+            Console.Write($"В ведите ТОК в Амперах:  ");
+            I = Convert.ToSingle(Console.ReadLine());
+            P = U * I;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\nМощьность равна: {P / 1000} кВт \n------------------------------------------------------");
+            Console.ResetColor();
+        }
+
+        static void OnePhaseCurrentFromPower() //Расчёт силы тока I = P / U
+        {
+            #region
+            Console.WriteLine("Расчёт силы тока.\n// I = P / U\n");
+            Console.Write($"Введите мощность в Ваттах:  ");
+            P = Convert.ToSingle(Console.ReadLine());
+            I = P / U;
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"\nСила Тока равна: {I.ToString("F" + 2)} Ампер \n-----------------------------------------------");
+            Console.ResetColor();
+            #endregion
+        }
     }
 }
