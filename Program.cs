@@ -10,11 +10,12 @@ namespace Electric_calculator
 {
     class Program
     {
+        
+        static readonly float U = 220;
+        static readonly float Uline = 0.38f;
+        static readonly float U_3 = U * 3; // 660 v
         static float P = default;
         static float I = default;
-        static float U = 220;
-        static float Uline = 0.38f;
-        static float U_3 = U * 3; // 660 v
         static float CosF = default;
         static float I_A, I_B, I_C = default;
         static float resultBlock_1;
